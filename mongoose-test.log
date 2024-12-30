@@ -1,0 +1,10 @@
+2024-12-04T10:55:22.625Z: Starting Mongoose connection test...
+2024-12-04T10:55:22.630Z: Attempting to connect...
+2024-12-04T10:55:23.011Z: Successfully connected to MongoDB
+2024-12-04T10:55:23.012Z: Connection state: 1
+2024-12-04T10:55:23.013Z: Connected to database: test
+2024-12-04T10:55:23.186Z: Successfully created test document
+2024-12-04T10:55:23.212Z: Found test document: {"_id":"6750351b6109e60e54d8ab35","name":"test","createdAt":"2024-12-04T10:55:23.021Z","__v":0}
+2024-12-04T10:55:23.236Z: Cleaned up test document
+2024-12-04T10:55:23.242Z: Connection closed
+2024-12-04T10:55:23.243Z: All tests passed successfully

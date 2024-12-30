@@ -1,0 +1,27 @@
+1|.model-viewer-wrapper {
+2|  width: 100%;
+3|  max-width: 600px;
+4|  margin: 0 auto;
+5|  display: flex;
+6|  flex-direction: column;
+7|  align-items: center;
+8|}
+9|
+10|.model-viewer-container {
+11|  width: 600px;
+12|  height: 700px;
+13|  position: relative;
+14|  background-color: var(--background);
+15|  border-radius: 12px;
+16|  border: 1px solid var(--border);
+17|  display: flex;
+18|  align-items: center;
+19|  justify-content: center;
+20|  overflow: hidden;
+21|}
+22|
+23|.model-viewer-container :global(canvas) {
+24|  width: 600px !important;
+25|  height: 700px !important;
+26|  display: block !important;
+27|} 

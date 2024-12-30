@@ -1,0 +1,18 @@
+1|.viewer-container {
+2|  width: 600px;
+3|  height: 600px;
+4|  display: flex;
+5|  align-items: center;
+6|  justify-content: center;
+7|  background-color: var(--background);
+8|  border-radius: 12px;
+9|  overflow: hidden;
+10|  position: relative;
+11|  border: 1px solid var(--border);
+12|}
+13|
+14|.viewer-container canvas {
+15|  width: 600px !important;
+16|  height: 600px !important;
+17|  display: block !important;
+18|}

@@ -1,0 +1,13 @@
+1|<Canvas
+2|  camera={{ 
+3|    position: [0, 0, 3.8],
+4|    fov: 42,
+5|    near: 0.1,
+6|    far: 1000
+7|  }}
+8|  style={{
+9|    width: '600px',
+10|    height: '700px',
+11|    borderRadius: '12px'
+12|  }}
+13|> 

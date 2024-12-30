@@ -1,0 +1,28 @@
+1|<Canvas
+2|  camera={{ 
+3|    position: [0, 0, 3.5],  // Closer camera position
+4|    fov: 35,  // Narrower FOV for more zoom
+5|    near: 0.1,
+6|    far: 1000
+7|  }}
+8|  style={{
+9|    width: '100%',
+10|    height: '100%',
+11|    borderRadius: '12px'
+12|  }}
+13|>
+14|  <Model url={processModelUrl(modelUrl)} />
+15|  
+16|  <OrbitControls
+17|    enablePan={false}
+18|    enableZoom={true}
+19|    enableRotate={true}
+20|    autoRotate={true}
+21|    autoRotateSpeed={0.5}
+22|    minDistance={2.5}  // Reduced min distance
+23|    maxDistance={5}    // Reduced max distance
+24|    maxPolarAngle={Math.PI / 1.5}
+25|    minPolarAngle={Math.PI / 3}
+26|    target={[-0.5, 0, 0]}  // Orbit around the offset point
+27|  />
+28|</Canvas> 

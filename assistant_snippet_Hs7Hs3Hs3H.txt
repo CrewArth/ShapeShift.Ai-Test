@@ -1,0 +1,12 @@
+1|<OrbitControls
+2|  enablePan={false}
+3|  enableZoom={true}
+4|  enableRotate={true}
+5|  autoRotate={true}
+6|  autoRotateSpeed={0.5}
+7|  minDistance={2.8}
+8|  maxDistance={5.5}
+9|  maxPolarAngle={Math.PI / 1.5}
+10|  minPolarAngle={Math.PI / 3}
+11|  target={[0, 0, 0]}
+12|/> 

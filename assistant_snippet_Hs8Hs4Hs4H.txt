@@ -1,0 +1,25 @@
+1|useEffect(() => {
+2|  // Calculate bounding box
+3|  const box = new THREE.Box3().setFromObject(scene);
+4|  const size = box.getSize(new THREE.Vector3());
+5|  const center = box.getCenter(new THREE.Vector3());
+6|  
+7|  // Get the largest dimension for scaling
+8|  const maxDim = Math.max(size.x, size.y, size.z);
+9|  const scale = 2.2 / maxDim;  // Increased scale for more zoom
+10|  
+11|  // Apply scale and center the model
+12|  scene.scale.multiplyScalar(scale);
+13|  scene.position.set(
+14|    -center.x * scale - 0.5,  // Offset to the left
+15|    -center.y * scale,
+16|    -center.z * scale
+17|  );
+18|  
+19|  // Position camera
+20|  camera.position.set(0, 0, 3.5);  // Closer camera position
+21|  camera.lookAt(-0.5, 0, 0);  // Look at the offset point
+22|  camera.updateProjectionMatrix();
+23|  
+24|  // ... rest of the material setup ...
+25|}, [scene, camera]); 
