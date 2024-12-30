@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  taskId      String   @unique
+  userId      String
+  type        String   // TEXT_TO_3D or IMAGE_TO_3D
+  status      String   // SUCCESS, FAILED
+  modelUrls   Json?    // Store URLs as JSON
+  prompt      String?  // For text-to-3d
+  imageUrl    String?  // For image-to-3d
+  creditsUsed Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([taskId])
+} 
