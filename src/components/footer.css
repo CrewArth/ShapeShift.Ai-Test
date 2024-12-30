@@ -1,0 +1,42 @@
+/* Footer Styles */
+.footer {
+  @apply bg-[var(--card-background)] border-t border-[var(--card-border)]
+         py-12 mt-20;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-8;
+}
+
+.footer-brand {
+  @apply text-xl font-bold text-[var(--text-primary)]
+         bg-gradient-to-r from-purple-600 to-blue-500
+         bg-clip-text text-transparent;
+}
+
+.footer-description {
+  @apply mt-2 text-[var(--text-secondary)] max-w-md;
+}
+
+.footer-section-title {
+  @apply text-sm font-semibold text-[var(--text-primary)]
+         uppercase tracking-wider mb-4;
+}
+
+.footer-links {
+  @apply space-y-3;
+}
+
+.footer-link {
+  @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+         transition-colors duration-200 block;
+}
+
+.footer-bottom {
+  @apply pt-8 mt-8 border-t border-[var(--card-border)]
+         text-[var(--text-secondary)] text-sm text-center;
+} 

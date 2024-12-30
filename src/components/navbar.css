@@ -1,0 +1,137 @@
+/* Navbar Styles */
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 bg-[var(--background)] border-b border-[var(--border)];
+}
+
+.navbar-container {
+  @apply max-w-7xl mx-auto px-4 h-16 flex items-center justify-between;
+}
+
+.navbar-brand-container {
+  @apply flex items-center gap-3;
+}
+
+.navbar-logo {
+  @apply w-10 h-10 rounded-lg;
+}
+
+.navbar-logo-placeholder {
+  @apply w-10 h-10 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500
+    flex items-center justify-center text-white text-xl font-bold;
+}
+
+.navbar-brand-text {
+  @apply text-xl font-bold;
+}
+
+/* Desktop Navigation */
+.desktop-only {
+  @apply hidden md:flex items-center gap-4;
+}
+
+.mobile-only {
+  @apply md:hidden;
+}
+
+.navbar-links {
+  @apply items-center gap-4;
+}
+
+.nav-link {
+  @apply text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200 px-2 py-1 rounded-md;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  @apply fixed top-16 left-0 right-0 bg-[var(--background)] border-b border-[var(--border)]
+         flex-col items-start p-4 gap-4 hidden;
+}
+
+.mobile-menu.show {
+  @apply flex;
+}
+
+.mobile-menu .nav-link {
+  @apply w-full py-2;
+}
+
+.mobile-menu .auth-buttons {
+  @apply flex-col w-full gap-2;
+}
+
+.mobile-menu .navbar-button,
+.mobile-menu .navbar-button-secondary {
+  @apply w-full;
+}
+
+/* Dropdown Styles */
+.dropdown-menu {
+  @apply absolute left-0 mt-2 w-48 bg-[var(--background)] rounded-lg shadow-lg
+    border border-[var(--border)] py-2 z-50;
+  top: 100%;
+}
+
+.dropdown-item {
+  @apply flex items-center justify-between w-full px-4 py-2 
+         text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+         hover:bg-[var(--background-secondary)] transition-colors duration-200;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  @apply flex items-center gap-3;
+}
+
+.navbar-button {
+  @apply px-4 py-2 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500 text-white
+    hover:from-purple-700 hover:to-blue-600
+    transition-all duration-200;
+}
+
+.navbar-button-secondary {
+  @apply px-4 py-2 rounded-lg font-medium
+    text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200;
+}
+
+/* Resources Button Container */
+.resources-container {
+  @apply relative;
+}
+
+.resources-button {
+  @apply text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200 px-2 py-1 rounded-md
+    flex items-center gap-1 cursor-pointer;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.credits-badge {
+  @apply ml-2 px-2 py-0.5 text-xs font-medium rounded-full
+         bg-purple-500 text-white;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-button {
+  @apply text-[var(--foreground)] p-2 hover:bg-[var(--background-secondary)] 
+         rounded-lg transition-colors;
+}
+
+/* Animation Classes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

@@ -1,0 +1,16 @@
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  @apply p-2 rounded-lg 
+    text-[var(--foreground)] hover:text-[var(--foreground)]
+    bg-transparent hover:bg-[var(--background-secondary)]
+    transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-purple-500;
+}
+
+.theme-toggle-btn svg {
+  @apply w-5 h-5 transition-transform duration-200;
+}
+
+.theme-toggle-btn:hover svg {
+  @apply scale-110;
+} 
