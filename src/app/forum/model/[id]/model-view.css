@@ -1,0 +1,46 @@
+.model-view-container {
+  @apply max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8;
+}
+
+.model-details {
+  @apply space-y-6 p-6 bg-[var(--background-secondary)] rounded-lg
+    border border-[var(--border)] shadow-lg;
+}
+
+.model-title {
+  @apply text-3xl font-bold text-[var(--foreground)];
+}
+
+.model-creator {
+  @apply text-lg text-[var(--foreground-secondary)];
+}
+
+.creator-name {
+  @apply font-medium text-purple-500;
+}
+
+.prompt-container {
+  @apply mt-8;
+}
+
+.prompt-title {
+  @apply text-xl font-semibold mb-3 text-[var(--foreground)];
+}
+
+.prompt-text {
+  @apply text-[var(--foreground-secondary)] leading-relaxed
+    p-4 bg-[var(--background)] rounded-lg border border-[var(--border)];
+}
+
+.model-viewer {
+  @apply bg-[var(--background-secondary)] rounded-lg overflow-hidden
+    border border-[var(--border)] shadow-lg;
+}
+
+.loading-state {
+  @apply text-center py-12 text-lg text-[var(--foreground-secondary)];
+}
+
+.error-state {
+  @apply text-center py-12 text-lg text-red-500;
+} 

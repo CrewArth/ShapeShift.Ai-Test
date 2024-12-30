@@ -1,0 +1,228 @@
+/* Main Layout */
+.workspace-container {
+  @apply max-w-7xl mx-auto px-4 pt-24 pb-12;
+}
+
+.workspace-title {
+  @apply text-3xl font-bold text-center mb-2 text-[var(--foreground)];
+}
+
+.workspace-subtitle {
+  @apply text-lg text-center mb-8 text-[var(--foreground-secondary)];
+}
+
+.workspace-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+}
+
+/* Image Upload Container */
+.upload-container {
+  @apply bg-[var(--background)] p-6 rounded-lg border border-[var(--border)] shadow-lg;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.upload-title {
+  @apply text-xl font-semibold mb-4 text-[var(--foreground)];
+}
+
+.dropzone {
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1;
+  @apply border-2 border-dashed border-[var(--border)] rounded-lg
+    bg-[var(--background-secondary)] p-4 sm:p-8
+    flex flex-col items-center justify-center gap-4
+    cursor-pointer transition-all duration-200
+    hover:border-purple-500 hover:bg-[var(--background)]
+    mx-auto;
+}
+
+.preview-container {
+  @apply relative w-full aspect-square rounded-lg overflow-hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.preview-image {
+  @apply object-contain rounded-lg;
+}
+
+.dropzone-content {
+  @apply text-center px-2;
+}
+
+.dropzone-icon {
+  @apply text-3xl sm:text-4xl mb-2 sm:mb-4;
+}
+
+.dropzone-text {
+  @apply text-[var(--foreground-secondary)] text-sm sm:text-base;
+}
+
+.dropzone-text strong {
+  @apply text-purple-500 font-semibold;
+}
+
+.generate-button-container {
+  @apply mt-6;
+}
+
+.generate-button {
+  @apply w-full px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500
+    text-white transition-all duration-200
+    hover:from-purple-700 hover:to-blue-600
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    disabled:opacity-50 disabled:cursor-not-allowed
+    flex items-center justify-center gap-2;
+}
+
+.error-message {
+  @apply mt-4 p-4 bg-red-100 text-red-700 rounded-lg;
+}
+
+/* 3D Result Container */
+.result-container {
+  @apply bg-[var(--background)] p-6 rounded-lg border border-[var(--border)] shadow-lg;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.result-title {
+  @apply text-xl font-semibold mb-4 text-[var(--foreground)];
+}
+
+.viewer-container {
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 1;
+  position: relative;
+  @apply bg-[var(--background-secondary)] rounded-lg overflow-hidden mb-6 mx-auto border border-[var(--border)]
+    flex items-center justify-center;
+}
+
+.empty-state-message {
+  @apply text-[var(--foreground-secondary)] text-lg text-center max-w-sm px-6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.model-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-container {
+  @apply flex items-center justify-center h-full text-[var(--text-secondary)];
+}
+
+.loading-content {
+  @apply text-center;
+}
+
+.loading-text {
+  @apply mt-4 text-[var(--text-secondary)];
+}
+
+/* Download Buttons */
+.download-section {
+  @apply mt-6;
+}
+
+.download-title {
+  @apply text-lg font-semibold mb-4 text-[var(--foreground)] text-center;
+}
+
+.download-grid {
+  @apply grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto;
+}
+
+.download-button {
+  @apply px-4 py-2 text-sm font-medium rounded-lg
+    text-white transition-all duration-200
+    hover:shadow-lg hover:scale-105
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    flex items-center justify-center gap-1;
+}
+
+.download-button-glb {
+  @apply bg-gradient-to-r from-green-600 to-teal-500 hover:from-green-700 hover:to-teal-600;
+}
+
+.download-button-fbx {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600;
+}
+
+.download-button-obj {
+  @apply bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600;
+}
+
+.download-button-usdz {
+  @apply bg-gradient-to-r from-orange-600 to-red-500 hover:from-orange-700 hover:to-red-600;
+}
+
+/* Action Buttons */
+.action-buttons {
+  @apply mt-6 flex flex-col sm:flex-row gap-4 justify-center;
+}
+
+.publish-button {
+  @apply px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500 text-white
+    hover:from-purple-700 hover:to-blue-600
+    transition-all duration-200
+    flex items-center justify-center gap-2;
+}
+
+/* Tips Container */
+.tips-container {
+  @apply mt-6 p-6 rounded-lg border border-[var(--border)]
+    bg-[var(--background-secondary)] shadow-sm;
+}
+
+.tips-title {
+  @apply text-lg font-semibold mb-4 text-[var(--foreground)]
+    flex items-center gap-2;
+}
+
+.tips-list {
+  @apply space-y-3;
+}
+
+.tip-item {
+  @apply flex items-start gap-2 text-[var(--foreground-secondary)];
+}
+
+.tip-icon {
+  @apply text-purple-500 flex-shrink-0 mt-1;
+} 
+
+
+.cl-userButtonPopoverCard {
+  background: linear-gradient(135deg, rgb(124, 58, 237) 0%, rgb(59, 130, 246) 100%);
+}
+
+@media (max-width: 480px) {
+  .dropzone {
+    max-width: 300px;
+  }
+  
+  .dropzone-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dropzone-text {
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+}

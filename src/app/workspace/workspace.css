@@ -1,0 +1,352 @@
+/* Loading Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading-overlay {
+  @apply absolute inset-0 flex flex-col items-center justify-center bg-[var(--card-background)] rounded-lg;
+}
+
+.loading-spinner {
+  @apply relative w-20 h-20;
+}
+
+.loading-spinner-outer {
+  @apply absolute inset-0 border-4 border-purple-200 rounded-full;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.loading-spinner-inner {
+  @apply absolute inset-0 border-4 border-purple-500 rounded-full border-t-transparent;
+  animation: spin 1s linear infinite;
+}
+
+.loading-progress {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply text-lg font-semibold text-purple-500;
+}
+
+.loading-message {
+  @apply mt-6 text-lg font-medium text-[var(--text-primary)];
+}
+
+.loading-submessage {
+  @apply mt-4 text-sm text-[var(--text-secondary)] text-center max-w-sm;
+}
+
+.loading-progress-bar {
+  @apply w-64 h-2 mt-6 bg-purple-100 rounded-full overflow-hidden;
+}
+
+.loading-progress-bar-fill {
+  @apply h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300;
+}
+
+/* Workspace Layout */
+.workspace-container {
+  @apply min-h-screen bg-[var(--background)];
+}
+
+.workspace-main {
+  @apply container mx-auto px-4 pt-24 pb-12;
+}
+
+.workspace-content {
+  @apply max-w-7xl mx-auto;
+}
+
+.workspace-grid {
+  @apply flex flex-col lg:flex-row gap-8;
+}
+
+.workspace-sidebar {
+  @apply w-full lg:w-1/3 space-y-6;
+}
+
+.workspace-preview {
+  @apply w-full lg:w-2/3;
+}
+
+/* Workspace Components */
+.workspace-panel {
+  @apply bg-[var(--card-background)] rounded-lg p-6
+         border border-[var(--card-border)];
+}
+
+.workspace-panel-title {
+  @apply text-xl font-semibold text-[var(--text-primary)] mb-4;
+}
+
+.workspace-input {
+  @apply w-full px-4 py-3 rounded-lg border border-[var(--card-border)]
+         bg-[var(--input-background)] text-[var(--text-primary)]
+         focus:outline-none focus:ring-2 focus:ring-purple-500;
+}
+
+.workspace-button {
+  @apply w-full px-4 py-3 text-white font-medium rounded-lg
+         bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600
+         disabled:opacity-50 disabled:cursor-not-allowed
+         transition-all duration-200;
+}
+
+/* Preview Panel */
+.preview-panel {
+  @apply bg-[var(--card-background)] rounded-lg p-6 
+         border border-[var(--card-border)] relative;
+  min-height: 750px;  /* Increased height to accommodate buttons */
+}
+
+.model-viewer {
+  @apply flex flex-col items-center;
+  height: 100%;
+}
+
+.buttons-container {
+  @apply flex flex-col items-center gap-4 mt-4 w-full max-w-md mx-auto;
+  padding-bottom: 20px;
+}
+
+.buttons-grid {
+  @apply grid grid-cols-2 gap-2 w-full max-w-md;
+}
+
+.preview-placeholder {
+  @apply h-full flex flex-col items-center justify-center text-[var(--text-secondary)];
+}
+
+.preview-icon {
+  @apply w-16 h-16 mx-auto mb-4 opacity-50;
+}
+
+.preview-text {
+  @apply text-lg;
+}
+
+.preview-subtext {
+  @apply text-sm mt-2;
+}
+
+/* Input Panel */
+.workspace-panel {
+  @apply bg-[var(--card-background)] rounded-xl p-6 border border-[var(--card-border)]
+         shadow-sm;
+}
+
+.workspace-panel-title {
+  @apply text-xl font-semibold mb-4 text-[var(--text-primary)];
+}
+
+.workspace-input {
+  @apply w-full px-4 py-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500
+         bg-[var(--background)] border border-[var(--card-border)] text-[var(--text-primary)]
+         placeholder-[var(--text-secondary)] resize-none;
+}
+
+.workspace-button {
+  @apply w-full px-6 py-3 rounded-lg font-medium text-white transition-all duration-200
+         disabled:opacity-50 disabled:cursor-not-allowed;
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+}
+
+.workspace-button:not(:disabled):hover {
+  @apply shadow-lg;
+  transform: translateY(-1px);
+}
+
+/* Tips Container */
+.tips-container {
+  @apply mt-6 p-6 rounded-lg border border-[var(--border)]
+    bg-[var(--background-secondary)] shadow-sm;
+}
+
+.tips-title {
+  @apply text-lg font-semibold mb-4 text-[var(--foreground)]
+    flex items-center gap-2;
+}
+
+.tips-list {
+  @apply space-y-3;
+}
+
+.tip-item {
+  @apply flex items-start gap-2 text-[var(--foreground-secondary)];
+}
+
+.tip-icon {
+  @apply text-purple-500 flex-shrink-0 mt-1;
+}
+
+/* Upload Area */
+.upload-label {
+  @apply block text-[var(--text-secondary)] text-sm mb-2;
+}
+
+.upload-area {
+  @apply flex items-center justify-center;
+}
+
+.upload-button {
+  @apply flex items-center justify-center w-full px-6 py-3 rounded-lg transition-all duration-200
+         border-2 border-dashed border-[var(--card-border)] text-[var(--text-secondary)]
+         hover:border-purple-500 hover:text-purple-500 cursor-pointer;
+}
+
+.upload-preview {
+  @apply mt-4 relative rounded-lg overflow-hidden;
+}
+
+/* Header/Navbar Styles */
+.navbar {
+  @apply fixed top-0 left-0 right-0 border-b z-50;
+  background-color: var(--background);
+  border-color: var(--card-border);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between;
+}
+
+.navbar-brand {
+  @apply text-2xl font-bold;
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.navbar-links {
+  @apply flex items-center gap-6;
+}
+
+.nav-link {
+  @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 font-medium;
+}
+
+/* Footer Styles */
+.footer {
+  @apply bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+}
+
+.footer-brand {
+  @apply text-2xl font-bold mb-4;
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.footer-description {
+  @apply text-[var(--text-secondary)];
+}
+
+.footer-section-title {
+  @apply text-lg font-semibold text-[var(--text-primary)] mb-4;
+}
+
+.footer-links {
+  @apply space-y-2;
+}
+
+.footer-link {
+  @apply text-[var(--text-secondary)] hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 block;
+}
+
+.footer-bottom {
+  @apply border-t border-gray-200 dark:border-gray-800 mt-12 pt-8 text-center text-[var(--text-secondary)];
+}
+
+/* Download and Publish Buttons */
+.download-button {
+  @apply text-white font-medium rounded-lg transition-all duration-200;
+  min-width: 120px !important;
+  padding: 8px 16px !important;
+}
+
+.download-button-glb {
+  background-color: #4CAF50 !important;
+}
+.download-button-glb:hover {
+  background-color: #45a049 !important;
+}
+
+.download-button-fbx {
+  background-color: #2196F3 !important;
+}
+.download-button-fbx:hover {
+  background-color: #1976D2 !important;
+}
+
+.download-button-obj {
+  background-color: #FF9800 !important;
+}
+.download-button-obj:hover {
+  background-color: #F57C00 !important;
+}
+
+.download-button-mtl {
+  background-color: #9C27B0 !important;
+}
+.download-button-mtl:hover {
+  background-color: #7B1FA2 !important;
+}
+
+.publish-button {
+  @apply text-white font-medium rounded-lg transition-all duration-200;
+  background-color: #E91E63 !important;
+  min-width: 300px !important;
+  padding: 12px 24px !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 16px !important;
+}
+.publish-button:hover {
+  background-color: #C2185B !important;
+}
+
+.buttons-grid {
+  @apply grid grid-cols-2 gap-2 w-full max-w-md;
+}
+
+html[data-theme="light"] .workspace-panel,
+html[data-theme="light"] .preview-panel,
+html[data-theme="light"] .tips-container,
+html[data-theme="light"] .model-viewer-container {
+  background-color: #e9ecef !important;
+}
+
+[data-theme="light"] .publish-button,
+[data-theme="light"] .download-button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .publish-button:hover,
+[data-theme="light"] .download-button:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .action-buttons {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+} 

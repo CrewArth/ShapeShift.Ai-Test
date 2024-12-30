@@ -1,0 +1,161 @@
+.pricing-header {
+  @apply text-center mb-16 relative;
+}
+
+.pricing-title {
+  @apply text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 bg-clip-text text-transparent
+         animate-gradient-x;
+}
+
+.pricing-subtitle {
+  @apply text-xl text-[var(--foreground-secondary)] max-w-2xl mx-auto;
+}
+
+.pricing-tabs {
+  @apply flex justify-center gap-4 mb-12;
+}
+
+.tab-button {
+  @apply px-8 py-3 rounded-full font-medium transition-all duration-300
+         border-2 border-[var(--border)] bg-[var(--background)]
+         hover:bg-[var(--background-secondary)] hover:border-purple-500
+         text-lg;
+}
+
+.tab-button.active {
+  @apply bg-gradient-to-r from-purple-600 to-blue-500 text-white border-transparent
+         shadow-lg shadow-purple-500/20;
+}
+
+.tab-button.disabled {
+  @apply opacity-50 cursor-not-allowed hover:bg-[var(--background)] hover:border-[var(--border)];
+}
+
+.pricing-card {
+  @apply relative flex flex-col p-8 rounded-2xl border-2 border-[var(--border)]
+         bg-[var(--background-secondary)] transition-all duration-300
+         hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10
+         hover:-translate-y-1;
+}
+
+.pricing-card.popular {
+  @apply border-purple-500 shadow-2xl shadow-purple-500/20;
+}
+
+.popular-badge {
+  @apply absolute -top-4 left-1/2 transform -translate-x-1/2
+         bg-gradient-to-r from-purple-600 to-blue-500
+         text-white text-sm font-bold px-6 py-2 rounded-full
+         shadow-lg shadow-purple-500/30;
+}
+
+.pricing-row {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto w-full mt-6;
+}
+
+.pricing-plan-info {
+  @apply text-center mb-8;
+}
+
+.pricing-plan-name {
+  @apply text-2xl font-bold mb-4 text-[var(--foreground)];
+}
+
+.pricing-plan-price {
+  @apply flex items-center justify-center gap-2 mb-3;
+}
+
+.pricing-plan-price .currency {
+  @apply text-3xl font-medium text-[var(--foreground)];
+}
+
+.pricing-plan-price .amount {
+  @apply text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent;
+}
+
+.pricing-plan-price .duration {
+  @apply text-xl text-[var(--foreground-secondary)];
+}
+
+.pricing-plan-credits {
+  @apply text-lg text-[var(--foreground-secondary)] font-medium;
+}
+
+.pricing-card-features {
+  @apply space-y-4 mb-8 flex-grow;
+}
+
+.feature-item {
+  @apply flex items-center gap-3 text-[var(--foreground-secondary)];
+}
+
+.feature-icon {
+  @apply w-5 h-5 text-green-500;
+}
+
+.pricing-card-button {
+  @apply w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
+         bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600
+         focus:outline-none focus:ring-4 focus:ring-purple-500/30
+         disabled:opacity-50 disabled:cursor-not-allowed
+         transition-all duration-300
+         shadow-lg shadow-purple-500/20
+         hover:shadow-xl hover:shadow-purple-500/30;
+}
+
+.notification-banner {
+  @apply flex items-center gap-4 p-6 mb-12 mx-auto max-w-4xl rounded-2xl
+         bg-gradient-to-r from-purple-500/10 to-blue-500/10
+         border-2 border-purple-500/20
+         text-[var(--foreground-secondary)];
+}
+
+.notification-banner svg {
+  @apply text-purple-500 flex-shrink-0 w-6 h-6;
+}
+
+.notification-banner p {
+  @apply text-base leading-relaxed;
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+@media (max-width: 768px) {
+  .pricing-title {
+    @apply text-4xl;
+  }
+
+  .pricing-subtitle {
+    @apply text-lg px-4;
+  }
+
+  .notification-banner {
+    @apply mx-4;
+  }
+
+  .pricing-row {
+    @apply px-4;
+  }
+
+  .pricing-card {
+    @apply p-6;
+  }
+
+  .pricing-plan-price .amount {
+    @apply text-4xl;
+  }
+} 

@@ -1,0 +1,120 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 8px;
+  background: var(--background);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 0.875rem;
+  color: var(--foreground-secondary);
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  padding: 2rem;
+  color: var(--foreground-secondary);
+}
+
+.result-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.result-info {
+  padding: 1rem;
+  background: var(--background);
+  border-radius: 4px;
+}
+
+.result-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--foreground);
+}
+
+.prompt-text {
+  color: var(--foreground-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.thumbnail {
+  margin: 1rem 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.download-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.download-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.download-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  padding: 1rem;
+  background: rgb(254, 226, 226);
+  color: rgb(185, 28, 28);
+  border-radius: 4px;
+  text-align: center;
+  margin: 1rem 0;
+} 

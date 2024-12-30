@@ -1,0 +1,270 @@
+.search-section {
+  @apply pt-24 pb-8 mt-16;
+}
+
+.forum-title {
+  @apply text-4xl font-bold text-center mb-8 text-[var(--foreground)];
+}
+
+.search-container {
+  @apply relative mx-auto max-w-3xl flex items-center gap-4;
+}
+
+.search-wrapper {
+  @apply relative flex-1;
+}
+
+.search-input {
+  @apply w-full px-4 py-2 rounded-lg 
+    bg-[var(--background-secondary)] text-[var(--foreground)]
+    border border-[var(--border)] focus:outline-none 
+    focus:ring-2 focus:ring-purple-500
+    transition-all duration-200;
+}
+
+.search-button {
+  @apply px-6 py-2 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500
+    text-white transition-all duration-200
+    hover:from-purple-700 hover:to-blue-600
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    flex items-center gap-2;
+}
+
+.models-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+  margin: 2rem;
+}
+
+.model-card {
+  @apply bg-[var(--background-secondary)] rounded-lg overflow-hidden 
+    shadow-lg transition-all duration-300
+    border border-[var(--border)] cursor-pointer;
+  min-height: 350px;
+  margin-right: 1rem;
+}
+
+.model-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.model-thumbnail {
+  @apply relative overflow-hidden;
+  height: 200px;
+  background: var(--background-secondary);
+}
+
+.model-thumbnail > div {
+  @apply w-full h-full relative;
+}
+
+.model-thumbnail::after {
+  content: '';
+  @apply absolute inset-0;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.2) 50%, 
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+.model-thumbnail img {
+  @apply w-full h-full object-cover transition-transform duration-300;
+}
+
+.model-card:hover .model-thumbnail img {
+  transform: scale(1.05);
+}
+
+.model-card-info {
+  @apply p-4 border-t border-[var(--border)];
+  background: var(--background);
+}
+
+.model-title {
+  @apply text-lg font-semibold mb-2 line-clamp-1;
+  color: var(--foreground);
+}
+
+.model-author {
+  @apply text-sm mb-2;
+  color: var(--foreground-secondary);
+}
+
+.model-description {
+  @apply text-sm mb-2 line-clamp-2;
+  color: var(--foreground-secondary);
+}
+
+.model-type {
+  @apply text-sm opacity-75;
+  color: var(--foreground-secondary);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 z-50
+    flex items-center justify-center p-4;
+}
+
+.modal-content {
+  @apply bg-[var(--background)] rounded-lg shadow-xl
+    w-full max-w-6xl max-h-[90vh] overflow-y-auto
+    relative;
+}
+
+.modal-close {
+  @apply absolute top-4 right-4 text-2xl font-bold
+    text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200 z-10;
+}
+
+.modal-body {
+  @apply p-6;
+}
+
+.modal-title {
+  @apply text-2xl font-bold mb-2;
+  color: var(--foreground);
+}
+
+.modal-author {
+  @apply mb-6;
+  color: var(--foreground-secondary);
+}
+
+.modal-model-viewer {
+  @apply bg-[var(--background-secondary)] rounded-lg overflow-hidden mb-6;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-model-viewer :global(canvas) {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+.modal-details {
+  @apply mb-6;
+}
+
+.modal-description {
+  @apply mb-4;
+  color: var(--foreground);
+}
+
+.modal-tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.tag {
+  @apply px-2 py-1 text-xs rounded-full 
+    bg-[var(--background)] text-[var(--foreground-secondary)];
+}
+
+.download-button {
+  @apply w-full px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-green-600 to-teal-500
+    text-white transition-all duration-200
+    hover:from-green-700 hover:to-teal-600
+    focus:outline-none focus:ring-2 focus:ring-green-500
+    flex items-center justify-center gap-2;
+}
+
+.dashboard-card:hover .card-image-with-vignette img {
+  @apply scale-110;
+}
+
+.card-content {
+  @apply p-6 text-center relative z-20;
+}
+
+.card-title {
+  @apply text-2xl font-bold mb-3 text-[var(--foreground)]
+    flex items-center justify-center gap-2;
+}
+
+.card-description {
+  @apply text-[var(--foreground-secondary)] leading-relaxed;
+}
+
+.new-badge {
+  @apply ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full
+    text-xs font-medium bg-purple-500 text-white;
+}
+
+.dashboard-footer {
+  @apply mt-auto py-8 bg-[var(--background-secondary)] border-t border-[var(--border)];
+}
+
+.footer-content {
+  @apply container mx-auto px-4 flex flex-col md:flex-row
+    items-center justify-center gap-8;
+}
+
+.footer-text {
+  @apply text-[var(--foreground-secondary)] text-center;
+}
+
+.footer-links {
+  @apply flex items-center justify-center gap-6 flex-wrap;
+}
+
+.footer-link {
+  @apply text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200;
+}
+
+/* Empty state styles */
+.empty-state {
+  @apply flex flex-col items-center justify-center py-12 text-center;
+  min-height: 400px;
+}
+
+.empty-state-icon {
+  @apply text-6xl mb-4;
+  color: var(--foreground-secondary);
+}
+
+.empty-state-title {
+  @apply text-2xl font-bold mb-2;
+  color: var(--foreground);
+}
+
+.empty-state-text {
+  @apply max-w-md mx-auto;
+  color: var(--foreground-secondary);
+}
+
+.auth-required-message {
+  @apply flex flex-col items-center justify-center gap-4 p-8 text-center;
+  height: 100%;
+  background: var(--background-secondary);
+}
+
+.auth-required-message p {
+  @apply text-lg text-[var(--foreground-secondary)];
+}
+
+.sign-in-button {
+  @apply px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500
+    text-white transition-all duration-200
+    hover:from-purple-700 hover:to-blue-600;
+}
+
+.model-error-message {
+  @apply absolute inset-0 flex items-center justify-center p-4
+    bg-[var(--background-secondary)] text-[var(--foreground-secondary)]
+    text-center;
+}
+
+.download-button.disabled {
+  @apply opacity-50 cursor-not-allowed;
+  pointer-events: none;
+} 

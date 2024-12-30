@@ -1,0 +1,140 @@
+.contact-container {
+  @apply container mx-auto px-4 py-16 mt-16;
+}
+
+.contact-content {
+  @apply max-w-2xl mx-auto bg-[var(--background-secondary)] p-8 rounded-lg shadow-lg border border-[var(--border)];
+}
+
+.contact-title {
+  @apply text-3xl font-bold mb-4 text-center bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent;
+}
+
+.contact-description {
+  @apply text-[var(--foreground-secondary)] text-center mb-8;
+}
+
+.contact-form {
+  @apply space-y-6;
+}
+
+.form-group {
+  @apply flex flex-col gap-2;
+}
+
+.form-group label {
+  @apply text-sm font-medium text-[var(--foreground)];
+}
+
+.form-input {
+  @apply w-full px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)]
+         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
+         transition-colors duration-200;
+}
+
+.form-textarea {
+  @apply w-full px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)]
+         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
+         transition-colors duration-200 resize-none;
+}
+
+.submit-button {
+  @apply w-full flex items-center justify-center px-6 py-3 text-white font-medium rounded-lg
+         bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600
+         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed
+         transition-all duration-200;
+}
+
+.submit-button:hover:not(:disabled) {
+  @apply transform -translate-y-0.5;
+}
+
+/* Follow Me Section */
+.follow-section {
+  @apply py-16 bg-[var(--card-background)] border-t border-[var(--card-border)]
+         flex flex-col items-center justify-center;
+}
+
+.follow-title {
+  @apply text-3xl font-bold mb-12 text-center
+         bg-gradient-to-r from-purple-600 to-blue-500 
+         bg-clip-text text-transparent
+         w-full;
+}
+
+.social-icons-grid {
+  @apply grid grid-cols-2 sm:grid-cols-4 gap-6 
+         max-w-2xl mx-auto w-full px-4;
+}
+
+.social-icon {
+  @apply flex flex-col items-center justify-center gap-2 
+         p-4 rounded-lg border border-[var(--card-border)]
+         hover:shadow-lg transition-all duration-200
+         aspect-square;
+}
+
+.social-icon span {
+  @apply text-sm font-medium text-[var(--text-primary)]
+         mt-2 text-center;
+}
+
+/* Social Icon Colors */
+.social-icon.linkedin {
+  @apply hover:border-[#0077B5] hover:text-[#0077B5]
+         hover:bg-[#0077B5]/5;
+}
+
+.social-icon.github {
+  @apply hover:border-[#333] hover:text-[#333] 
+         dark:hover:border-[#fff] dark:hover:text-[#fff]
+         hover:bg-[#333]/5 dark:hover:bg-[#fff]/5;
+}
+
+.social-icon.youtube {
+  @apply hover:border-[#FF0000] hover:text-[#FF0000]
+         hover:bg-[#FF0000]/5;
+}
+
+.social-icon.instagram {
+  @apply hover:border-[#E4405F] hover:text-[#E4405F]
+         hover:bg-[#E4405F]/5;
+}
+
+/* Footer Styles */
+.footer {
+  @apply bg-[var(--background-secondary)] border-t border-[var(--border)];
+}
+
+.footer-container {
+  @apply container mx-auto px-4 py-12;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-8;
+}
+
+.footer-brand {
+  @apply text-xl font-bold text-[var(--foreground)] mb-2;
+}
+
+.footer-description {
+  @apply text-[var(--foreground-secondary)] text-sm;
+}
+
+.footer-section-title {
+  @apply text-sm font-semibold text-[var(--foreground)] uppercase tracking-wider mb-4;
+}
+
+.footer-links {
+  @apply flex flex-col space-y-2;
+}
+
+.footer-link {
+  @apply text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors duration-200;
+}
+
+.footer-bottom {
+  @apply text-center text-[var(--foreground-secondary)] text-sm pt-8 border-t border-[var(--border)];
+} 

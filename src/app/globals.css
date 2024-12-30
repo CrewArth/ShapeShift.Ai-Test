@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --background-secondary: #f8f9fa;
+    --foreground: #0f172a;
+    --foreground-secondary: #475569;
+    --border: #e2e8f0;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary: rgb(124 58 237);
+    --primary-foreground: #ffffff;
+  }
+
+  :root[class~="dark"] {
+    --background: #0f172a;
+    --background-secondary: #1e293b;
+    --foreground: #f8fafc;
+    --foreground-secondary: #94a3b8;
+    --border: #334155;
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+    --primary: rgb(124 58 237);
+    --primary-foreground: #ffffff;
+  }
+}
+
+* {
+  @apply border-[var(--border)];
+  cursor: auto;
+}
+
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)];
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Form Styles */
+.form-input,
+.form-textarea {
+  @apply w-full px-4 py-2 rounded-lg border border-[var(--border)]
+         bg-[var(--background)] text-[var(--foreground)]
+         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
+         transition-colors duration-200;
+}
+
+.form-submit {
+  @apply w-full px-6 py-3 text-white font-medium rounded-lg
+         bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600
+         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed
+         transition-all duration-200;
+}
+
+/* Interactive Elements */
+button, a, input[type="button"], input[type="submit"] {
+  cursor: pointer;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  cursor: text;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-[var(--background-secondary)] text-[var(--foreground)]
+         border border-[var(--border)] rounded-lg shadow-lg;
+}
+
+/* Text Styles */
+.text-primary {
+  @apply text-[var(--foreground)];
+}
+
+.text-secondary {
+  @apply text-[var(--foreground-secondary)];
+}
+
+/* Background Styles */
+.bg-primary {
+  @apply bg-[var(--background)];
+}
+
+.bg-secondary {
+  @apply bg-[var(--background-secondary)];
+}
+
+/* Image to 3D Workspace Styles */
+.workspace-container {
+  @apply max-w-7xl mx-auto px-4 pt-24 pb-12;
+}
+
+.workspace-title {
+  @apply text-3xl font-bold text-center mb-2 text-[var(--foreground)];
+}
+
+.workspace-subtitle {
+  @apply text-lg text-center mb-8 text-[var(--foreground-secondary)];
+}
+
+.workspace-panel {
+  @apply bg-[var(--background)] p-6 rounded-lg border border-[var(--border)] shadow-lg;
+}
+
+.dropzone {
+  @apply border-2 border-dashed border-[var(--border)] rounded-lg
+    bg-[var(--background-secondary)] p-8
+    flex flex-col items-center justify-center gap-4
+    cursor-pointer transition-all duration-200
+    hover:border-purple-500 hover:bg-[var(--background)];
+}
+
+.dropzone strong {
+  @apply text-purple-500 font-semibold;
+}
+
+.generate-button {
+  @apply w-full px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-purple-600 to-blue-500
+    text-white transition-all duration-200
+    hover:from-purple-700 hover:to-blue-600
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    disabled:opacity-50 disabled:cursor-not-allowed
+    flex items-center justify-center gap-2;
+}
+
+.download-button {
+  @apply w-full px-6 py-3 rounded-lg font-medium
+    bg-gradient-to-r from-green-600 to-teal-500
+    text-white transition-all duration-200
+    hover:from-green-700 hover:to-teal-600
+    focus:outline-none focus:ring-2 focus:ring-green-500
+    flex items-center justify-center gap-2;
+}
+  

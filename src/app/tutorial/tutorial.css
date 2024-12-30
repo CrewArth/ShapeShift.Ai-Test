@@ -1,0 +1,252 @@
+/* Hero Section */
+.tutorial-hero {
+  @apply py-16 mt-16 bg-[var(--background-secondary)] border-b border-[var(--border)];
+}
+
+.tutorial-title {
+  @apply text-4xl md:text-5xl font-bold text-center mb-4
+         bg-gradient-to-r from-purple-600 to-blue-500
+         bg-clip-text text-transparent;
+}
+
+.tutorial-subtitle {
+  @apply text-lg md:text-xl text-center text-[var(--foreground-secondary)]
+         max-w-2xl mx-auto;
+}
+
+/* Section Styles */
+.tutorial-section {
+  @apply py-16;
+}
+
+.section-header {
+  @apply flex flex-row items-center gap-3 mb-8 max-w-4xl mx-auto;
+}
+
+.section-header h2 {
+  @apply text-2xl md:text-3xl font-bold text-[var(--foreground)];
+}
+
+.section-icon {
+  @apply w-8 h-8 text-purple-500;
+}
+
+.content-grid {
+  @apply max-w-4xl mx-auto;
+}
+
+.text-content h3 {
+  @apply text-xl font-bold mb-4 text-[var(--foreground)] text-center;
+}
+
+.text-content p {
+  @apply text-[var(--foreground-secondary)] mb-8 text-center max-w-3xl mx-auto;
+}
+
+/* Steps Container */
+.steps-container {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 mb-12;
+}
+
+.step {
+  @apply relative p-6 rounded-lg border border-[var(--border)]
+         bg-[var(--background)] transition-all duration-200
+         hover:shadow-lg hover:border-purple-500;
+}
+
+.step-number {
+  @apply w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-blue-500
+         text-white flex items-center justify-center font-bold mb-4;
+}
+
+.step h4 {
+  @apply text-lg font-bold mb-2 text-[var(--foreground)];
+}
+
+.step p {
+  @apply text-sm text-[var(--foreground-secondary)];
+}
+
+/* Example Prompts */
+.example-prompts {
+  @apply mb-12;
+}
+
+.prompts-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.prompt-card {
+  @apply p-6 rounded-lg border border-[var(--border)]
+         bg-[var(--background)] transition-all duration-200
+         hover:shadow-lg;
+}
+
+.prompt-card h4 {
+  @apply text-lg font-bold mb-2 text-[var(--foreground)];
+}
+
+.prompt-text {
+  @apply text-sm text-[var(--foreground-secondary)] mb-4
+         p-4 rounded bg-[var(--background-secondary)]
+         border border-[var(--border)];
+}
+
+.tips-list {
+  @apply space-y-2;
+}
+
+.tip-item {
+  @apply flex items-center gap-2 text-sm text-[var(--foreground-secondary)];
+}
+
+/* Image Example */
+.example-container {
+  @apply flex flex-col md:flex-row gap-8 mb-12;
+}
+
+.example-image {
+  @apply flex-1;
+}
+
+.image-caption {
+  @apply text-sm text-[var(--foreground-secondary)] mt-2 text-center;
+}
+
+.tips-container {
+  @apply flex-1;
+}
+
+.tips-grid {
+  @apply space-y-4;
+}
+
+.tip-card {
+  @apply flex items-start gap-3 p-4 rounded-lg
+         border border-[var(--border)] bg-[var(--background)]
+         transition-all duration-200 hover:shadow-lg;
+}
+
+.tip-icon {
+  @apply w-5 h-5 text-purple-500 flex-shrink-0;
+}
+
+/* Call to Action */
+.cta-section {
+  @apply py-16 bg-[var(--background-secondary)] border-t border-[var(--border)];
+}
+
+.cta-section h2 {
+  @apply text-2xl md:text-3xl font-bold mb-4 text-[var(--foreground)] text-center;
+}
+
+.cta-section p {
+  @apply text-lg text-[var(--foreground-secondary)] mb-8 text-center;
+}
+
+.cta-buttons {
+  @apply flex flex-col md:flex-row gap-4 justify-center;
+}
+
+.cta-button {
+  @apply flex items-center gap-2 px-6 py-3 rounded-lg font-medium
+         transition-all duration-200 text-white;
+}
+
+.cta-button.text {
+  @apply bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600;
+}
+
+.cta-button.image {
+  @apply bg-gradient-to-r from-blue-500 to-purple-600
+         hover:from-blue-600 hover:to-purple-700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tutorial-hero {
+    @apply py-12 mt-12;
+  }
+
+  .tutorial-title {
+    @apply text-3xl;
+  }
+
+  .tutorial-subtitle {
+    @apply text-base;
+  }
+
+  .section-header {
+    @apply mb-6;
+  }
+
+  .example-container {
+    @apply flex-col;
+  }
+
+  .example-image img {
+    @apply w-full;
+  }
+
+  .cta-buttons {
+    @apply flex-col;
+  }
+} 
+
+/* Credit System Section */
+.credit-info-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 mb-12;
+}
+
+.credit-info-card {
+  @apply p-6 rounded-lg border border-[var(--border)]
+         bg-[var(--background)] transition-all duration-200
+         hover:shadow-lg hover:border-purple-500;
+}
+
+.credit-info-card h4 {
+  @apply text-lg font-bold mb-3 text-[var(--foreground)]
+         bg-gradient-to-r from-purple-600 to-blue-500
+         bg-clip-text text-transparent;
+}
+
+.credit-info-card p {
+  @apply text-sm text-[var(--foreground-secondary)] mb-4;
+}
+
+.feature-list {
+  @apply space-y-3;
+}
+
+.feature-list li {
+  @apply flex items-center gap-2 text-sm text-[var(--foreground-secondary)];
+}
+
+.feature-list li svg {
+  @apply text-green-500 flex-shrink-0;
+}
+
+.pricing-note {
+  @apply flex items-start gap-3 p-4 rounded-lg
+         bg-[var(--background-secondary)] border border-[var(--border)]
+         text-[var(--foreground-secondary)] max-w-3xl mx-auto;
+}
+
+.pricing-note svg {
+  @apply text-blue-500 flex-shrink-0 mt-0.5;
+}
+
+.pricing-note p {
+  @apply text-sm mb-0 text-left;
+}
+
+.view-pricing-button {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium
+         bg-gradient-to-r from-purple-600 to-blue-500 items-center
+         text-white transition-all duration-200
+         hover:from-purple-700 hover:to-blue-600
+         mt-8;
+}
+
+/* ... rest of the CSS ... */ 

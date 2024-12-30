@@ -1,0 +1,16 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import Navbar from '@/components/Navbar';
+import Credits from '@/components/Credits';
+import ModelViewer from '@/components/ModelViewer';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { Clock, Box, CreditCard, IndianRupee } from 'lucide-react';
+import { format } from 'date-fns';
+import '../history.css';
+import { Card } from '@/components/ui/card';
+import DownloadReceiptButton from '../DownloadReceiptButton';
+import Image from 'next/image';
+import { toast } from 'sonner'; 

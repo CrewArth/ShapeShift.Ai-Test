@@ -1,0 +1,177 @@
+.about-us-container {
+  @apply max-w-7xl mx-auto px-4 py-24;
+}
+
+.hero-section {
+  @apply text-center mb-16;
+}
+
+.hero-title {
+  @apply text-5xl font-bold mb-4;
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  @apply text-xl text-[var(--foreground-secondary)];
+}
+
+.developer-section {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16;
+}
+
+.developer-image-container {
+  @apply relative w-full max-w-md mx-auto lg:max-w-none;
+  aspect-ratio: 1;
+}
+
+.developer-image {
+  @apply rounded-2xl shadow-2xl w-full h-full object-cover;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.developer-content {
+  @apply space-y-6;
+}
+
+.content-wrapper {
+  @apply bg-[var(--background-secondary)] rounded-2xl p-8 shadow-lg border-2 border-[var(--border)];
+}
+
+.developer-name {
+  @apply text-3xl font-bold mb-4;
+  background: linear-gradient(
+    300deg,
+    #7C3AED,
+    #3B82F6,
+    #EC4899,
+    #7C3AED
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-text 8s ease infinite;
+}
+
+@keyframes gradient-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.developer-description {
+  @apply text-[var(--foreground-secondary)] leading-relaxed mb-8;
+}
+
+.achievements {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-8;
+}
+
+.achievement-item {
+  @apply bg-[var(--background)] p-6 rounded-xl border border-[var(--border)] transition-all duration-300;
+}
+
+.achievement-item:hover {
+  @apply border-purple-500 shadow-lg transform -translate-y-1;
+}
+
+.achievement-item h3 {
+  @apply text-lg font-semibold mb-2 text-[var(--foreground)];
+}
+
+.achievement-item p {
+  @apply text-sm text-[var(--foreground-secondary)];
+}
+
+.social-links {
+  @apply flex justify-center gap-6 mt-8;
+}
+
+.social-link {
+  @apply p-3 rounded-full bg-[var(--background)] border border-[var(--border)]
+         hover:border-purple-500 hover:text-purple-500 transition-all duration-300
+         hover:shadow-lg hover:-translate-y-1;
+}
+
+.social-icon {
+  @apply w-6 h-6;
+}
+
+.skills-section {
+  @apply mb-16;
+}
+
+.skills-title {
+  @apply text-3xl font-bold text-center mb-12 text-[var(--foreground)];
+}
+
+.skills-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto;
+}
+
+.skill-card {
+  @apply bg-[var(--background-secondary)] p-6 rounded-xl border border-[var(--border)]
+         hover:border-purple-500 transition-all duration-300;
+}
+
+.skill-card h3 {
+  @apply text-lg font-semibold mb-4 text-[var(--foreground)];
+}
+
+.skill-bar {
+  @apply w-full h-3 bg-[var(--background)] rounded-full overflow-hidden;
+}
+
+.skill-progress {
+  @apply h-full rounded-full;
+  background: linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%);
+  animation: slideIn 1.5s ease-out forwards;
+  transform-origin: left;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-4xl;
+  }
+
+  .hero-subtitle {
+    @apply text-lg;
+  }
+
+  .developer-name {
+    @apply text-2xl;
+  }
+
+  .achievements {
+    @apply grid-cols-1;
+  }
+
+  .skills-grid {
+    @apply grid-cols-1;
+  }
+} 

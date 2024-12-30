@@ -1,0 +1,477 @@
+/* Section Spacing */
+.section-spacing {
+  @apply py-32;
+}
+
+/* Hero Section */
+.hero-section {
+  @apply flex flex-col items-center justify-center min-h-screen text-center px-4 relative overflow-hidden;
+  background: radial-gradient(circle at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+}
+
+/* Animated Background */
+.hero-pattern {
+  @apply absolute inset-0 opacity-10;
+  background: 
+    linear-gradient(45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--background) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--background) 75%);
+  background-size: 20px 20px;
+  animation: pattern-move 20s linear infinite;
+}
+
+.hero-pattern::before,
+.hero-pattern::after {
+  content: '';
+  @apply absolute inset-0;
+  background: 
+    linear-gradient(45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--background) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--background) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  animation: pattern-move 20s linear infinite;
+}
+
+.hero-pattern::after {
+  opacity: 0.5;
+  background: 
+    radial-gradient(circle at 50% 50%, var(--background) 25%, transparent 25%),
+    radial-gradient(circle at 0% 0%, var(--background) 25%, transparent 25%),
+    radial-gradient(circle at 100% 100%, var(--background) 25%, transparent 25%);
+  background-size: 40px 40px;
+  animation: pattern-pulse 15s ease-in-out infinite alternate;
+}
+
+@keyframes pattern-move {
+  0% {
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  100% {
+    background-position: 40px 40px, 40px 50px, 50px 30px, 30px 40px;
+  }
+}
+
+@keyframes pattern-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+/* Floating Elements */
+.floating-shapes {
+  @apply absolute inset-0 overflow-hidden pointer-events-none;
+}
+
+.floating-shape {
+  @apply absolute bg-gradient-to-r from-purple-600/20 to-blue-500/20 rounded-full;
+  animation: float 20s infinite;
+}
+
+.floating-shape:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -50px;
+  animation-delay: 0s;
+}
+
+.floating-shape:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  top: 30%;
+  right: -30px;
+  animation-delay: -5s;
+}
+
+.floating-shape:nth-child(3) {
+  width: 250px;
+  height: 250px;
+  bottom: -50px;
+  left: 30%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -10px) rotate(5deg);
+  }
+  50% {
+    transform: translate(-5px, 15px) rotate(-5deg);
+  }
+  75% {
+    transform: translate(-15px, -5px) rotate(3deg);
+  }
+}
+
+/* Hero Content */
+.hero-content {
+  @apply relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center;
+  margin-top: 2rem;
+}
+
+/* Hero Title */
+.hero-title-container {
+  @apply flex flex-col items-center gap-6 mb-8;
+}
+
+.hero-title-top {
+  @apply text-6xl sm:text-7xl font-bold text-[var(--foreground)];
+}
+
+.hero-title-gradient {
+  @apply text-6xl sm:text-7xl font-bold
+         bg-gradient-to-r from-purple-600 to-blue-500
+         bg-clip-text text-transparent;
+}
+
+.hero-subtitle {
+  @apply text-xl sm:text-2xl text-[var(--foreground-secondary)] max-w-2xl mx-auto mb-12;
+}
+
+/* Buttons */
+.button-container {
+  @apply flex gap-4 justify-center flex-wrap;
+}
+
+.button-primary {
+  @apply px-6 py-3 text-white font-medium rounded-full
+         bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600
+         shadow-md hover:shadow-lg
+         transition-all duration-200;
+}
+
+.button-secondary {
+  @apply px-6 py-3 font-medium rounded-full
+         text-[var(--text-primary)] bg-transparent
+         border-2 border-[var(--card-border)]
+         hover:border-purple-500 hover:text-purple-500
+         shadow-sm hover:shadow-md
+         transition-all duration-200;
+}
+
+.button-forum {
+  @apply px-6 py-3 font-medium rounded-full
+         text-white bg-gradient-to-r from-purple-600 to-blue-500
+         hover:from-purple-700 hover:to-blue-600
+         shadow-md hover:shadow-lg
+         transition-all duration-200;
+}
+
+/* Make buttons consistent width */
+.button-primary,
+.button-secondary,
+.button-forum {
+  min-width: 180px;
+}
+
+/* Feature Cards */
+.features-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  margin-bottom: 3rem;
+}
+
+.feature-card {
+  @apply p-6 rounded-xl border border-[var(--border)] flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg;
+}
+
+.feature-icon-wrapper {
+  @apply w-10 h-10 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500
+         flex items-center justify-center mb-3;
+}
+
+.feature-icon {
+  @apply mb-4 text-purple-500;
+  stroke-width: 1.5;
+}
+
+.feature-title {
+  @apply text-xl font-bold mb-3 text-[var(--foreground)];
+}
+
+.feature-description {
+  @apply text-[var(--foreground-secondary)] leading-relaxed;
+}
+
+/* About Developer Section */
+.about-section {
+  @apply py-16 relative overflow-hidden;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-pattern {
+  @apply absolute inset-0 opacity-10;
+  background: 
+    linear-gradient(45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--background) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--background) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--background) 75%);
+  background-size: 20px 20px;
+  animation: pattern-move 20s linear infinite;
+}
+
+.about-developer-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto;
+}
+
+.about-image-container {
+  @apply flex justify-center lg:justify-center order-2 lg:order-1;
+}
+
+.about-image-wrapper {
+  @apply relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden
+         border-4 border-purple-500 shadow-xl;
+  animation: float 6s ease-in-out infinite;
+}
+
+.about-image {
+  @apply object-cover w-full h-full scale-105 hover:scale-110 transition-transform duration-500;
+}
+
+.about-content {
+  @apply space-y-4 order-1 lg:order-2 text-center lg:text-left;
+}
+
+.about-title {
+  @apply text-4xl font-bold text-[var(--text-primary)]
+         bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent
+         text-center mb-16;
+}
+
+.about-text {
+  @apply text-[var(--text-secondary)] leading-relaxed space-y-4 text-base;
+}
+
+/* Contact Form Section */
+.contact-section {
+  @apply py-16 relative;
+  margin-top: 2rem;
+}
+
+.contact-form {
+  @apply max-w-xl mx-auto mt-8 space-y-6 px-8 py-10 relative;
+  background: var(--background);
+}
+
+/* Gradient Border Container */
+.contact-form::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(to right, #7C3AED, #3B82F6);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.contact-title {
+  @apply text-3xl font-bold text-center mb-16 text-[var(--text-primary)]
+         bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent;
+}
+
+.form-group {
+  @apply space-y-2;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-[var(--foreground)];
+}
+
+.form-input {
+  @apply w-full px-4 py-3 rounded-lg bg-[var(--background-secondary)]
+    border border-[var(--border)] text-[var(--foreground)]
+    focus:outline-none focus:ring-2 focus:ring-purple-500;
+}
+
+.form-submit {
+  @apply w-full px-6 py-3 text-white font-medium rounded-lg
+    bg-gradient-to-r from-purple-600 to-blue-500
+    hover:from-purple-700 hover:to-blue-600
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    transition-all duration-200;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Follow Me Section */
+.follow-section {
+  @apply py-16 bg-[var(--card-background)] border-t border-[var(--card-border)]
+         flex flex-col items-center justify-center;
+}
+
+.follow-title {
+  @apply text-3xl font-bold mb-12 text-center
+         bg-gradient-to-r from-purple-600 to-blue-500 
+         bg-clip-text text-transparent
+         w-full;
+}
+
+.social-icons-grid {
+  @apply grid grid-cols-2 sm:grid-cols-4 gap-6 
+         max-w-2xl mx-auto w-full px-4;
+}
+
+.social-icon {
+  @apply flex flex-col items-center justify-center gap-2 
+         p-4 rounded-lg border border-[var(--card-border)]
+         hover:shadow-lg transition-all duration-200
+         aspect-square;
+}
+
+.social-icon span {
+  @apply text-sm font-medium text-[var(--text-primary)]
+         mt-2 text-center;
+}
+
+/* Social Icon Colors */
+.social-icon.linkedin {
+  @apply hover:border-[#0077B5] hover:text-[#0077B5]
+         hover:bg-[#0077B5]/5;
+}
+
+.social-icon.github {
+  @apply hover:border-[#333] hover:text-[#333] 
+         dark:hover:border-[#fff] dark:hover:text-[#fff]
+         hover:bg-[#333]/5 dark:hover:bg-[#fff]/5;
+}
+
+.social-icon.youtube {
+  @apply hover:border-[#FF0000] hover:text-[#FF0000]
+         hover:bg-[#FF0000]/5;
+}
+
+.social-icon.instagram {
+  @apply hover:border-[#E4405F] hover:text-[#E4405F]
+         hover:bg-[#E4405F]/5;
+}
+
+/* Section Styles */
+.section {
+  @apply py-16 px-4;
+}
+
+.section-title {
+  @apply text-3xl font-bold text-center mb-12 text-[var(--foreground)];
+}
+
+.section-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto;
+}
+
+/* Success/Error Messages */
+.success-message {
+  @apply mt-4 p-4 bg-green-100 text-green-700 rounded-lg;
+}
+
+.error-message {
+  @apply mt-4 p-4 bg-red-100 text-red-700 rounded-lg;
+}
+
+/* Time Saving Message */
+.time-saving-message {
+  @apply text-center mt-12 text-lg text-[var(--foreground-secondary)] max-w-3xl mx-auto;
+}
+
+/* Footer Styles */
+.footer {
+  @apply mt-auto py-12 bg-[var(--background-secondary)] border-t border-[var(--border)];
+}
+
+.footer-container {
+  @apply max-w-5xl mx-auto px-4;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 text-center;
+}
+
+.footer-brand {
+  @apply text-2xl font-bold text-[var(--foreground)] mb-4;
+}
+
+.footer-description {
+  @apply text-[var(--foreground-secondary)] max-w-sm mx-auto;
+}
+
+.footer-section-title {
+  @apply text-lg font-semibold mb-4 text-[var(--foreground)];
+}
+
+.footer-links {
+  @apply space-y-3;
+}
+
+.footer-link {
+  @apply text-[var(--foreground-secondary)] hover:text-[var(--foreground)]
+    transition-colors duration-200 block;
+}
+
+.footer-bottom {
+  @apply mt-12 pt-8 border-t border-[var(--border)] text-center
+    text-[var(--foreground-secondary)];
+}
+  
+
+.cl-userButtonPopoverCard {
+  background: linear-gradient(135deg, rgb(124, 58, 237) 0%, rgb(59, 130, 246) 100%);
+}
