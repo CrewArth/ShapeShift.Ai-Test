@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
 import axios from 'axios';
 import { MESHY_API_BASE_URL } from '@/config/constants';
@@ -45,29 +45,50 @@ interface MeshyResponse {
 
 async function updateHistory(
   taskId: string, 
-  status: 'PROCESSING' | 'SUCCEEDED' | 'FAILED', 
-  modelUrls: string[], 
-  thumbnailUrl: string,
+  status: 'PENDING' | 'PROCESSING' | 'SUCCEEDED' | 'FAILED', 
+  modelUrls: string[] = [], 
+  thumbnailUrl: string = '',
   creditsUsed: number = 1
 ) {
   try {
-    const historyEntry = new ImageTo3DHistory({
-      taskId,
-      userId: auth().userId,
+    const userId = auth().userId;
+    if (!userId) {
+      console.error('[API] No userId found while updating history');
+      return;
+    }
+
+    const update = {
+      userId,
       type: 'image-to-3d',
       status,
       modelUrl: modelUrls[0] || '',
       thumbnailUrl: thumbnailUrl || '',
-      taskError: {
-        message: ''
-      },
-      createdAt: new Date()
-    });
+      taskError: { message: '' },
+      creditsUsed,
+      updatedAt: new Date()
+    };
 
-    await historyEntry.save();
-    console.log('History entry created:', historyEntry);
+    // Only set createdAt on first creation
+    const options = {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: true
+    };
+
+    const result = await ImageTo3DHistory.findOneAndUpdate(
+      { taskId },
+      update,
+      options
+    );
+
+    console.log('[API] History entry updated:', {
+      taskId,
+      status,
+      userId,
+      success: !!result
+    });
   } catch (error) {
-    console.error('Error updating history:', error);
+    console.error('[API] Error updating history:', error);
     // Don't throw error to prevent cascading failures
   }
 }
@@ -250,231 +271,228 @@ async function checkTaskStatus(taskId: string, userId: string) {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    console.log('[API] Starting image-to-3d request processing');
+    console.log('[API] Starting image-to-3d request');
     
     const { userId } = auth();
     if (!userId) {
-      console.log('[API] Unauthorized request - no userId found');
+      console.log('[API] Unauthorized - no userId found');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Log request details
-    console.log('[API] Request details:', {
-      method: request.method,
-      contentType: request.headers.get('content-type'),
-      userId,
-      timestamp: new Date().toISOString()
-    });
+    // Connect to database
+    await connectToDatabase();
 
+    // Check credits
+    const userCredits = await UserCredits.findOne({ userId });
+    if (!userCredits || userCredits.credits < CREDIT_COST_PER_GENERATION) {
+      console.log('[API] Insufficient credits:', {
+        userId,
+        currentCredits: userCredits?.credits,
+        required: CREDIT_COST_PER_GENERATION
+      });
+      return NextResponse.json(
+        { error: 'Insufficient credits' },
+        { status: 400 }
+      );
+    }
+
+    // Get the image from the request
     let formData: FormData;
     try {
       formData = await request.formData();
-      console.log('[API] FormData parsed successfully:', {
+      console.log('[API] FormData received:', {
         keys: Array.from(formData.keys()),
-        timestamp: new Date().toISOString()
+        hasImage: formData.has('image')
       });
     } catch (error) {
-      console.error('[API] Error parsing FormData:', {
-        error,
-        contentType: request.headers.get('content-type'),
-        timestamp: new Date().toISOString()
-      });
+      console.error('[API] FormData parsing error:', error);
       return NextResponse.json({ 
         error: 'Invalid request format. Expected multipart/form-data.' 
       }, { status: 400 });
     }
 
     const image = formData.get('image') as File | null;
-    const taskId = formData.get('taskId') as string | null;
-
-    console.log('[API] Request parameters:', {
-      hasImage: !!image,
-      imageType: image?.type,
-      imageSize: image?.size,
-      taskId,
-      timestamp: new Date().toISOString()
-    });
-
-    const apiKey = process.env.MESHY_API_KEY;
-    if (!apiKey) {
-      console.error('[API] Missing API key');
-      return NextResponse.json(
-        { message: 'Server configuration error: API key not found' },
-        { status: 500 }
-      );
-    }
-
-    // If taskId is provided, check task status
-    if (taskId) {
-      try {
-        const taskStatus = await checkTaskStatus(taskId, userId);
-        return NextResponse.json(taskStatus);
-      } catch (error: any) {
-        console.error('[API] Error checking task status:', {
-          error: error.message,
-          stack: error.stack,
-          taskId,
-          userId,
-          timestamp: new Date().toISOString()
-        });
-        return NextResponse.json({ 
-          status: 'FAILED',
-          message: error.message || 'Failed to check task status',
-          error: error.message
-        }, { status: 500 });
-      }
-    }
-
-    // Validate image
     if (!image) {
-      console.log('[API] No image provided in request');
-      return NextResponse.json({ 
-        error: 'No image provided',
-        details: 'The request must include an image file.'
-      }, { status: 400 });
+      console.log('[API] No image found in request');
+      return NextResponse.json({ error: 'No image provided' }, { status: 400 });
     }
+
+    console.log('[API] Image details:', {
+      name: image.name,
+      type: image.type,
+      size: image.size
+    });
 
     // Validate image format
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     if (!allowedTypes.includes(image.type)) {
-      console.log('[API] Invalid image format:', {
-        providedType: image.type,
-        allowedTypes,
-        timestamp: new Date().toISOString()
-      });
+      console.log('[API] Invalid image type:', image.type);
       return NextResponse.json({ 
-        error: 'Invalid image format',
-        details: 'Only JPG, JPEG, and PNG are supported.',
-        providedType: image.type
+        error: 'Invalid image format. Only JPG and PNG are supported.' 
       }, { status: 400 });
     }
 
-    // Check credits
-    await connectToDatabase();
-    const userCredits = await UserCredits.findOne({ userId });
-    const currentCredits = userCredits?.credits || 0;
-    
-    console.log('[API] Credit check:', {
-      userId,
-      currentCredits,
-      requiredCredits: CREDIT_COST_PER_GENERATION,
-      timestamp: new Date().toISOString()
+    // Validate image size (max 10MB)
+    if (image.size > 10 * 1024 * 1024) {
+      console.log('[API] Image too large:', image.size);
+      return NextResponse.json({ 
+        error: 'Image size should be less than 10MB' 
+      }, { status: 400 });
+    }
+
+    // Convert image to base64
+    const imageBuffer = await image.arrayBuffer();
+    const base64Image = Buffer.from(imageBuffer).toString('base64');
+    const dataUri = `data:${image.type};base64,${base64Image}`;
+
+    console.log('[API] Image processed successfully');
+
+    // Create task
+    const response = await axios.post(
+      `${MESHY_API_BASE_URL}/image-to-3d`,
+      {
+        image_url: dataUri,
+        ai_model: "meshy-4",
+        topology: "quad",
+        target_polycount: 30000,
+        should_remesh: true,
+        enable_pbr: false
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.MESHY_API_KEY}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    console.log('[API] Meshy API response:', {
+      taskId: response.data.result,
+      status: response.status
     });
 
-    if (!userCredits || currentCredits < CREDIT_COST_PER_GENERATION) {
-      return NextResponse.json({ 
-        error: 'Insufficient credits',
-        details: `You need ${CREDIT_COST_PER_GENERATION} credits. Current balance: ${currentCredits}`,
-        creditsNeeded: CREDIT_COST_PER_GENERATION,
-        currentCredits
-      }, { status: 400 });
-    }
-
-    try {
-      // Convert image to base64
-      const imageBuffer = await image.arrayBuffer();
-      const base64Image = Buffer.from(imageBuffer).toString('base64');
-      const dataUri = `data:${image.type};base64,${base64Image}`;
-
-      console.log('[API] Image processed successfully:', {
-        size: imageBuffer.byteLength,
-        type: image.type,
-        timestamp: new Date().toISOString()
-      });
-
-      // Create task
-      const response = await axios.post(
-        `${MESHY_API_BASE_URL}/image-to-3d`,
-        {
-          image_url: dataUri,
-          ai_model: "meshy-4",
-          topology: "quad",
-          target_polycount: 30000,
-          should_remesh: true,
-          enable_pbr: false
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          timeout: 30000
-        }
-      );
-
-      console.log('[API] Meshy API response:', {
-        taskId: response.data.result,
-        status: response.status,
-        timestamp: new Date().toISOString()
-      });
-
-      // Initialize history entry
-      await updateHistory(
-        response.data.result,
-        'PROCESSING',
-        [],
-        dataUri,
-        CREDIT_COST_PER_GENERATION
-      );
-
-      // Deduct credits
-      await UserCredits.updateOne(
-        { userId },
-        { 
-          $inc: { credits: -CREDIT_COST_PER_GENERATION },
-          $push: {
-            transactions: {
-              type: 'usage',
-              amount: 0,
-              credits: CREDIT_COST_PER_GENERATION,
-              modelType: 'image-to-3d',
-              description: 'Image to 3D generation',
-              status: 'success',
-              timestamp: new Date()
-            }
+    // Deduct credits
+    const updatedCredits = await UserCredits.findOneAndUpdate(
+      { userId },
+      { 
+        $inc: { credits: -CREDIT_COST_PER_GENERATION },
+        $push: {
+          transactions: {
+            type: 'usage',
+            credits: -CREDIT_COST_PER_GENERATION,
+            modelType: 'image-to-3d',
+            timestamp: new Date(),
+            status: 'success'
           }
         }
-      );
+      },
+      { new: true }
+    );
 
-      return NextResponse.json({
-        taskId: response.data.result,
-        status: 'PROCESSING',
-        message: 'Task created successfully',
-        thumbnail_url: dataUri
-      });
-    } catch (error: any) {
-      console.error('[API] Task creation failed:', {
-        error: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-        stack: error.stack,
-        timestamp: new Date().toISOString()
-      });
+    // Initialize history entry
+    await updateHistory(
+      response.data.result,
+      'PROCESSING',
+      [],
+      dataUri,
+      CREDIT_COST_PER_GENERATION
+    );
 
-      // Refund credits on failure
-      await refundCredits(userId, 'Task creation failed');
-
-      return NextResponse.json({ 
-        status: 'FAILED',
-        message: 'Failed to create image-to-3D task',
-        error: error.message,
-        details: error.response?.data
-      }, { status: 500 });
-    }
-  } catch (error: any) {
-    console.error('[API] Unhandled error in image-to-3d:', {
-      error: error.message,
-      stack: error.stack,
-      timestamp: new Date().toISOString()
-    });
+    // Return the result along with updated credits
     return NextResponse.json({
-      status: 'FAILED',
-      message: 'Failed to process request',
-      error: error instanceof Error ? error.message : 'Unknown error',
-      details: error.stack
-    }, { status: 500 });
+      taskId: response.data.result,
+      status: 'PROCESSING',
+      message: 'Task created successfully',
+      thumbnail_url: dataUri,
+      remainingCredits: updatedCredits.credits
+    });
+
+  } catch (error) {
+    console.error('[API] Error in image-to-3d:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to process image' },
+      { status: 500 }
+    );
+  }
+}
+
+// Add GET method to handle status checks
+export async function GET(request: NextRequest) {
+  try {
+    const { userId } = auth();
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const taskId = request.nextUrl.searchParams.get('taskId');
+    if (!taskId) {
+      return NextResponse.json({ error: 'Task ID is required' }, { status: 400 });
+    }
+
+    console.log('[API] Checking task status:', { taskId, userId });
+
+    const response = await axios.get(
+      `${MESHY_API_BASE_URL}/image-to-3d/${taskId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.MESHY_API_KEY}`,
+          'Accept': 'application/json'
+        }
+      }
+    );
+
+    const data = response.data;
+    console.log('[API] Task status response:', {
+      taskId,
+      status: data.status,
+      progress: data.progress
+    });
+
+    // Map Meshy API status to our status
+    const statusMap = {
+      'SUCCEEDED': 'SUCCEEDED',
+      'FAILED': 'FAILED',
+      'PENDING': 'PROCESSING',
+      'PROCESSING': 'PROCESSING'
+    } as const;
+
+    const mappedStatus = statusMap[data.status as keyof typeof statusMap] || 'PROCESSING';
+
+    if (data.status === 'SUCCEEDED') {
+      return NextResponse.json({
+        status: mappedStatus,
+        progress: 100,
+        model_urls: {
+          ...data.model_urls,
+          textures: data.texture_urls
+        },
+        thumbnail_url: data.thumbnail_url
+      });
+    }
+
+    if (data.status === 'FAILED') {
+      return NextResponse.json({
+        status: 'FAILED',
+        error: data.task_error?.message || 'Task failed',
+        progress: data.progress || 0
+      });
+    }
+
+    return NextResponse.json({
+      status: mappedStatus,
+      progress: data.progress || 0,
+      thumbnail_url: data.thumbnail_url,
+      message: 'Model generation in progress'
+    });
+
+  } catch (error) {
+    console.error('[API] Status check error:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to check status' },
+      { status: 500 }
+    );
   }
 } 
